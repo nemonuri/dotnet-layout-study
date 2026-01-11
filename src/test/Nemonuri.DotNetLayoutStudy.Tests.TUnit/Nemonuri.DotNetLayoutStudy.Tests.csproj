@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" TreatAsLocal="_Dir">
+
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>14</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <PublishAot>true</PublishAot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TUnit" />
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <_Dir>$(MSBuildProjectDirectory)/../Nemonuri.DotNetLayoutStudy.Tests/</_Dir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(_Dir)FieldSlot.cs" />
+    <Compile Include="ConsoleExtensions.cs" />
+    <Compile Include="SequentialStruct1Test.cs" />
+    <Compile Include="SequentialStruct1Test.g.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Nemonuri.DotNetLayoutStudy\Nemonuri.DotNetLayoutStudy.csproj" />
+  </ItemGroup>
+  
+</Project>

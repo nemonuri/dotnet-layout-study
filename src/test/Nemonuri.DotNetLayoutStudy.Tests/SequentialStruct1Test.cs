@@ -88,6 +88,13 @@ public class SequentialStruct1Test
         GenericFieldTestCore<ByteAndTAndBytePack1<char>>();
         GenericFieldTestCore<ByteAndTAndByte<int>>();
         GenericFieldTestCore<ByteAndTAndBytePack1<int>>();
+#if NET7_0_OR_GREATER
+        GenericFieldTestCore<System.Int128>();
+        GenericFieldTestCore<System.Runtime.Intrinsics.Vector64<byte>>();
+        GenericFieldTestCore<System.Runtime.Intrinsics.Vector128<byte>>();
+        GenericFieldTestCore<System.Runtime.Intrinsics.Vector256<byte>>();
+        GenericFieldTestCore<System.Runtime.Intrinsics.Vector512<byte>>();
+#endif
     }
 
 
