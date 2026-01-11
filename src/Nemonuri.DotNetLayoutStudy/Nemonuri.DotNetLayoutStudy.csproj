@@ -5,6 +5,13 @@
     <TargetFrameworks>netstandard2.0;net10.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>14</LangVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$(UseDangerousStruct) == 'true'">
+    <DefineConstants>$(DefineConstants);DANGEROUS_STRUCT</DefineConstants>
+    <BaseOutputPath>$(BaseOutputPath)UseDangerousStruct\</BaseOutputPath>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
