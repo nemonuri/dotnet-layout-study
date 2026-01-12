@@ -5,7 +5,7 @@ using System.Text;
 
 static FileInfo GetOutputFileInfo([CallerFilePath] string thisFilePath = "")
 {
-    var path = Path.Combine([thisFilePath, "..", "..", "src", "Nemonuri.DotNetLayoutStudy.Tests.TUnit", "SequentialStruct1Test.g.cs"]);
+    var path = Path.Combine([thisFilePath, "..", "..", "src", "test", "Nemonuri.DotNetLayoutStudy.Tests.TUnit", "SequentialStruct1Test.g.cs"]);
     return new FileInfo(path);
 }
 
@@ -74,27 +74,32 @@ sb.AppendLine();
 sb.AppendLine
 (
 """
-    public unsafe void GenericFieldTest<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+    public async Task GenericFieldTest<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+        where TSequentialStruct1 : ISupportFieldAddress, new()
     {
-#pragma warning disable CS8500
-        // Arrange
-        TSequentialStruct1 s = new();
-        TSequentialStruct1* baseAddress = &s;
-        TSize3* field0Address = &s.Field0;
-        TSize32* field1Address = &s.Field1;
-        TSize33* field2Address = &s.Field2;
-        TSize34* field3Address = &s.Field3;
+#pragma warning disable CS8500, CS9123
+        unsafe
+        {
+            // Arrange
+            TSequentialStruct1 s = new();
+            TSequentialStruct1* baseAddress = &s;
+            TSize3* field0Address = (TSize3*)s.GetFieldAddressAt(0);
+            TSize32* field1Address = (TSize32*)s.GetFieldAddressAt(1);
+            TSize33* field2Address = (TSize33*)s.GetFieldAddressAt(2);
+            TSize34* field3Address = (TSize34*)s.GetFieldAddressAt(3);
 
-        // Act
-        Console.WriteValue(typeof(TSequentialStruct1).Name);
-        Console.WriteValue(FieldSlot.Create<TSize3>(baseAddress, field0Address, field1Address));
-        Console.WriteValue(FieldSlot.Create<TSize32>(field0Address+1, field1Address, field2Address));
-        Console.WriteValue(FieldSlot.Create<TSize33>(field1Address+1, field2Address, field3Address));
-        Console.WriteValue(FieldSlot.Create<TSize34>(field2Address+1, field3Address, baseAddress + 1));
+            // Act
+            Console.WriteValue(typeof(TSequentialStruct1).Name);
+            Console.WriteValue(FieldSlot.Create<TSize3>(baseAddress, field0Address, field1Address));
+            Console.WriteValue(FieldSlot.Create<TSize32>(field0Address+1, field1Address, field2Address));
+            Console.WriteValue(FieldSlot.Create<TSize33>(field1Address+1, field2Address, field3Address));
+            Console.WriteValue(FieldSlot.Create<TSize34>(field2Address+1, field3Address, baseAddress + 1));
+        }
 
         // Assert
+        await Assert.That<bool>(true).IsTrue();
 
-#pragma warning restore CS8500
+#pragma warning restore CS8500, CS9123
     }
 """
 );

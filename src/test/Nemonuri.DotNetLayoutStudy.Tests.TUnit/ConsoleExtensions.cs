@@ -16,4 +16,17 @@ public static class ConsoleExtensions
             Console.WriteLine($"{ptrExpr} = {value}");
         }
     }
+
+    extension(TestContext testContext)
+    {
+        public unsafe void WriteValue(void* ptr, [CallerArgumentExpression(nameof(ptr))] string ptrExpr = "")
+        {
+            testContext.OutputWriter.WriteLine($"{ptrExpr} = {(nint)ptr}");
+        }
+
+        public void WriteValue<TValue>(TValue value, [CallerArgumentExpression(nameof(value))] string ptrExpr = "")
+        {
+            testContext.OutputWriter.WriteLine($"{ptrExpr} = {value}");
+        }
+    }
 }

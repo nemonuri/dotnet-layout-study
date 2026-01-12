@@ -32,7 +32,7 @@ public struct SequentialStruct1
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct SequentialStruct1<T>
+public struct SequentialStruct1<T> : ISupportFieldAddress
 {
     public Size3<T> Field0;
 
@@ -41,4 +41,26 @@ public struct SequentialStruct1<T>
     public Size33<T> Field2;
 
     public Size34<T> Field3;
+
+    public unsafe void* GetFieldAddressAt(int index)
+    {
+#pragma warning disable CS8500
+        fixed (SequentialStruct1<T>* pThis = &this)
+        {
+            return index switch
+            {
+                0 => &pThis->Field0,
+                1 => &pThis->Field1,
+                2 => &pThis->Field2,
+                3 => &pThis->Field3,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+#pragma warning restore CS8500
+    }
+}
+
+public unsafe interface ISupportFieldAddress
+{
+    void* GetFieldAddressAt(int index);
 }
