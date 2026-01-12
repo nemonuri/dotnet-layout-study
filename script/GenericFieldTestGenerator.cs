@@ -3,6 +3,8 @@
 using System.Runtime.CompilerServices;
 using System.Text;
 
+const string GenericConstraint = "where TSequentialStruct1 : struct, ISupportFieldAddress";
+
 static FileInfo GetOutputFileInfo([CallerFilePath] string thisFilePath = "")
 {
     var path = Path.Combine([thisFilePath, "..", "..", "src", "test", "Nemonuri.DotNetLayoutStudy.Tests.TUnit", "SequentialStruct1Test.g.cs"]);
@@ -29,6 +31,8 @@ static string[] GetTypeArguments() =>
 "ByteAndTAndBytePack1<char>",
 "ByteAndTAndByte<int>",
 "ByteAndTAndBytePack1<int>",
+"ByteAndTAndByte<string>",
+"ByteAndTAndBytePack1<string>",
 "System.Int128",
 "System.Runtime.Intrinsics.Vector64<byte>",
 "System.Runtime.Intrinsics.Vector128<byte>",
@@ -46,9 +50,20 @@ static string SelectGenerateGenericTestAttribute(string typeArg)
     var typeOfWraps = typeParams.Select(static a => $"typeof({a})");
 
     StringBuilder sb = new();
-    sb.Append("    [GenerateGenericTest(");
+    sb.Append("[GenerateGenericTest(");
     sb.AppendJoin(", ", typeOfWraps);
     sb.Append(")]");
+    return sb.ToString();
+}
+
+static string SelectTestMethod(string typeArg)
+{
+    StringBuilder sb = new();
+    sb.Indent().AppendLine("[Test]");
+    sb.Indent().AppendLine(SelectGenerateGenericTestAttribute(typeArg));
+    sb.Indent().Append("public void GenericFieldTest_").Append(typeArg.ReplaceInvalidChars()).AppendLine("<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()");
+    sb.Indent().Indent().AppendLine(GenericConstraint);
+    sb.Indent().AppendLine("=> GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();");
     return sb.ToString();
 }
 
@@ -64,18 +79,14 @@ namespace Nemonuri.DotNetLayoutStudy.Tests;
 public partial class SequentialStruct1Test
 {
 
-    [Test]
 """    
 );
 
-sb.AppendJoin(Environment.NewLine, GetTypeArguments().Select(SelectGenerateGenericTestAttribute));
-sb.AppendLine();
-
 sb.AppendLine
 (
-"""
-    public async Task GenericFieldTest<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
-        where TSequentialStruct1 : ISupportFieldAddress, new()
+$$"""
+    internal void GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>() 
+        {{GenericConstraint}}
     {
 #pragma warning disable CS8500, CS9123
         unsafe
@@ -89,7 +100,9 @@ sb.AppendLine
             TSize34* field3Address = (TSize34*)s.GetFieldAddressAt(3);
 
             // Act
-            Console.WriteValue(typeof(TSequentialStruct1).Name);
+            Console.WriteLine();
+            Console.WriteValue(typeof(T).FullName);
+            Console.WriteValue(typeof(TSequentialStruct1).Attributes);
             Console.WriteValue(FieldSlot.Create<TSize3>(baseAddress, field0Address, field1Address));
             Console.WriteValue(FieldSlot.Create<TSize32>(field0Address+1, field1Address, field2Address));
             Console.WriteValue(FieldSlot.Create<TSize33>(field1Address+1, field2Address, field3Address));
@@ -97,12 +110,15 @@ sb.AppendLine
         }
 
         // Assert
-        await Assert.That<bool>(true).IsTrue();
 
 #pragma warning restore CS8500, CS9123
     }
 """
 );
+
+sb.AppendLine();
+sb.AppendJoin(Environment.NewLine, GetTypeArguments().Select(SelectTestMethod));
+sb.AppendLine();
 
 sb.AppendLine("}");
 
@@ -110,3 +126,24 @@ string fullPath = GetOutputFileInfo().FullName;
 File.WriteAllText(fullPath, sb.ToString());
 
 Console.WriteLine($"Complete. Path={fullPath}");
+
+file static class StringExtensions
+{
+    const string IndentValue = "    ";
+
+    extension(string str)
+    {
+        public string ReplaceInvalidChars()
+        {
+            ReadOnlySpan<char> chars = str.AsSpan();
+            Span<char> destChars = stackalloc char[chars.Length];
+            chars.ReplaceAny(destChars, System.Buffers.SearchValues.Create(['.', '<', '>', '?', '[', ']']), '_');
+            return new string(destChars);
+        }
+    }
+
+    extension(StringBuilder sb)
+    {
+        public StringBuilder Indent() => sb.Append(IndentValue);
+    }
+}
