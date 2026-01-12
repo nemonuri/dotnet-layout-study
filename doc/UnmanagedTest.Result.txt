@@ -1,0 +1,60 @@
+DescribeUnmanagedType
+typeof(T).FullName = System.Int32
+Unsafe.SizeOf<T>() = 4
+RuntimeHelpers.IsReferenceOrContainsReferences<T>() = False
+typeof(T).IsByRef = False
+typeof(T).IsByRefLike = False
+Unsafe.ByteOffset(in local2, in local1) = 4
+
+DescribeUnmanagedType
+typeof(T).FullName = System.IntPtr
+Unsafe.SizeOf<T>() = 8
+RuntimeHelpers.IsReferenceOrContainsReferences<T>() = False
+typeof(T).IsByRef = False
+typeof(T).IsByRefLike = False
+Unsafe.ByteOffset(in local2, in local1) = 8
+
+DescribeUnmanagedType
+typeof(T).FullName = EmptyRefStruct
+Unsafe.SizeOf<T>() = 1
+RuntimeHelpers.IsReferenceOrContainsReferences<T>() = False
+typeof(T).IsByRef = False
+typeof(T).IsByRefLike = True
+Unsafe.ByteOffset(in local2, in local1) = 8
+
+DescribeUnmanagedType
+typeof(T).FullName = SingleFieldRefStruct
+Unsafe.SizeOf<T>() = 4
+RuntimeHelpers.IsReferenceOrContainsReferences<T>() = False
+typeof(T).IsByRef = False
+typeof(T).IsByRefLike = True
+Unsafe.ByteOffset(in local2, in local1) = 8
+
+DescribeAnyType
+typeof(T).FullName = SingleRefFieldRefStruct
+Unsafe.SizeOf<T>() = 8
+RuntimeHelpers.IsReferenceOrContainsReferences<T>() = True
+typeof(T).IsByRef = False
+typeof(T).IsByRefLike = True
+Unsafe.ByteOffset(in local2, in local1) = 8
+
+DescribeAnyType
+typeof(T).FullName = System.Span`1[[System.Byte, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
+Unsafe.SizeOf<T>() = 16
+RuntimeHelpers.IsReferenceOrContainsReferences<T>() = True
+typeof(T).IsByRef = False
+typeof(T).IsByRefLike = True
+Unsafe.ByteOffset(in local2, in local1) = 16
+
+DescribeTypeHandle
+rth.GetType() = System.RuntimeTypeHandle
+RuntimeHelpers.SizeOf(rth) = 8
+
+DescribeTypeHandle
+rth.GetType() = System.RuntimeTypeHandle
+RuntimeHelpers.SizeOf(rth) = 40
+
+DescribeTypeHandle
+rth.GetType() = System.RuntimeTypeHandle
+RuntimeHelpers.SizeOf(rth) = 16
+
