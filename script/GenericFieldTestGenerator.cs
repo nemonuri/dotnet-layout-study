@@ -37,7 +37,11 @@ static string[] GetTypeArguments() =>
 "System.Runtime.Intrinsics.Vector64<byte>",
 "System.Runtime.Intrinsics.Vector128<byte>",
 "System.Runtime.Intrinsics.Vector256<byte>",
-"System.Runtime.Intrinsics.Vector512<byte>"
+"System.Runtime.Intrinsics.Vector512<byte>",
+"System.Runtime.InteropServices.GCHandle",
+"System.Runtime.InteropServices.GCHandle?",
+"ByteAndTAndByte<System.Runtime.InteropServices.GCHandle>",
+"ByteAndTAndBytePack1<System.Runtime.InteropServices.GCHandle>"
 ];
 
 static string SelectGenerateGenericTestAttribute(string typeArg)

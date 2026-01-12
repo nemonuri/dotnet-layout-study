@@ -184,4 +184,28 @@ public partial class SequentialStruct1Test
         where TSequentialStruct1 : struct, ISupportFieldAddress
     => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
 
+    [Test]
+    [GenerateGenericTest(typeof(System.Runtime.InteropServices.GCHandle), typeof(SequentialStruct1<System.Runtime.InteropServices.GCHandle>), typeof(Size3<System.Runtime.InteropServices.GCHandle>), typeof(Size32<System.Runtime.InteropServices.GCHandle>), typeof(Size33<System.Runtime.InteropServices.GCHandle>), typeof(Size34<System.Runtime.InteropServices.GCHandle>))]
+    public void GenericFieldTest_System_Runtime_InteropServices_GCHandle<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+        where TSequentialStruct1 : struct, ISupportFieldAddress
+    => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
+
+    [Test]
+    [GenerateGenericTest(typeof(System.Runtime.InteropServices.GCHandle?), typeof(SequentialStruct1<System.Runtime.InteropServices.GCHandle?>), typeof(Size3<System.Runtime.InteropServices.GCHandle?>), typeof(Size32<System.Runtime.InteropServices.GCHandle?>), typeof(Size33<System.Runtime.InteropServices.GCHandle?>), typeof(Size34<System.Runtime.InteropServices.GCHandle?>))]
+    public void GenericFieldTest_System_Runtime_InteropServices_GCHandle_<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+        where TSequentialStruct1 : struct, ISupportFieldAddress
+    => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
+
+    [Test]
+    [GenerateGenericTest(typeof(ByteAndTAndByte<System.Runtime.InteropServices.GCHandle>), typeof(SequentialStruct1<ByteAndTAndByte<System.Runtime.InteropServices.GCHandle>>), typeof(Size3<ByteAndTAndByte<System.Runtime.InteropServices.GCHandle>>), typeof(Size32<ByteAndTAndByte<System.Runtime.InteropServices.GCHandle>>), typeof(Size33<ByteAndTAndByte<System.Runtime.InteropServices.GCHandle>>), typeof(Size34<ByteAndTAndByte<System.Runtime.InteropServices.GCHandle>>))]
+    public void GenericFieldTest_ByteAndTAndByte_System_Runtime_InteropServices_GCHandle_<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+        where TSequentialStruct1 : struct, ISupportFieldAddress
+    => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
+
+    [Test]
+    [GenerateGenericTest(typeof(ByteAndTAndBytePack1<System.Runtime.InteropServices.GCHandle>), typeof(SequentialStruct1<ByteAndTAndBytePack1<System.Runtime.InteropServices.GCHandle>>), typeof(Size3<ByteAndTAndBytePack1<System.Runtime.InteropServices.GCHandle>>), typeof(Size32<ByteAndTAndBytePack1<System.Runtime.InteropServices.GCHandle>>), typeof(Size33<ByteAndTAndBytePack1<System.Runtime.InteropServices.GCHandle>>), typeof(Size34<ByteAndTAndBytePack1<System.Runtime.InteropServices.GCHandle>>))]
+    public void GenericFieldTest_ByteAndTAndBytePack1_System_Runtime_InteropServices_GCHandle_<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+        where TSequentialStruct1 : struct, ISupportFieldAddress
+    => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
+
 }
