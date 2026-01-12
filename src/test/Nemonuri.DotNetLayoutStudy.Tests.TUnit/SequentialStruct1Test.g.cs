@@ -208,4 +208,28 @@ public partial class SequentialStruct1Test
         where TSequentialStruct1 : struct, ISupportFieldAddress
     => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
 
+    [Test]
+    [GenerateGenericTest(typeof(ExplicitObjectStruct), typeof(SequentialStruct1<ExplicitObjectStruct>), typeof(Size3<ExplicitObjectStruct>), typeof(Size32<ExplicitObjectStruct>), typeof(Size33<ExplicitObjectStruct>), typeof(Size34<ExplicitObjectStruct>))]
+    public void GenericFieldTest_ExplicitObjectStruct<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+        where TSequentialStruct1 : struct, ISupportFieldAddress
+    => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
+
+    [Test]
+    [GenerateGenericTest(typeof(ExplicitObjectStruct?), typeof(SequentialStruct1<ExplicitObjectStruct?>), typeof(Size3<ExplicitObjectStruct?>), typeof(Size32<ExplicitObjectStruct?>), typeof(Size33<ExplicitObjectStruct?>), typeof(Size34<ExplicitObjectStruct?>))]
+    public void GenericFieldTest_ExplicitObjectStruct_<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+        where TSequentialStruct1 : struct, ISupportFieldAddress
+    => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
+
+    [Test]
+    [GenerateGenericTest(typeof(ByteAndTAndByte<ExplicitObjectStruct>), typeof(SequentialStruct1<ByteAndTAndByte<ExplicitObjectStruct>>), typeof(Size3<ByteAndTAndByte<ExplicitObjectStruct>>), typeof(Size32<ByteAndTAndByte<ExplicitObjectStruct>>), typeof(Size33<ByteAndTAndByte<ExplicitObjectStruct>>), typeof(Size34<ByteAndTAndByte<ExplicitObjectStruct>>))]
+    public void GenericFieldTest_ByteAndTAndByte_ExplicitObjectStruct_<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+        where TSequentialStruct1 : struct, ISupportFieldAddress
+    => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
+
+    [Test]
+    [GenerateGenericTest(typeof(ByteAndTAndBytePack1<ExplicitObjectStruct>), typeof(SequentialStruct1<ByteAndTAndBytePack1<ExplicitObjectStruct>>), typeof(Size3<ByteAndTAndBytePack1<ExplicitObjectStruct>>), typeof(Size32<ByteAndTAndBytePack1<ExplicitObjectStruct>>), typeof(Size33<ByteAndTAndBytePack1<ExplicitObjectStruct>>), typeof(Size34<ByteAndTAndBytePack1<ExplicitObjectStruct>>))]
+    public void GenericFieldTest_ByteAndTAndBytePack1_ExplicitObjectStruct_<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>()
+        where TSequentialStruct1 : struct, ISupportFieldAddress
+    => GenericFieldTestCore<T, TSequentialStruct1, TSize3, TSize32, TSize33, TSize34>();
+
 }

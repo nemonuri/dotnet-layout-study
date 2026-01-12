@@ -41,7 +41,11 @@ static string[] GetTypeArguments() =>
 "System.Runtime.InteropServices.GCHandle",
 "System.Runtime.InteropServices.GCHandle?",
 "ByteAndTAndByte<System.Runtime.InteropServices.GCHandle>",
-"ByteAndTAndBytePack1<System.Runtime.InteropServices.GCHandle>"
+"ByteAndTAndBytePack1<System.Runtime.InteropServices.GCHandle>",
+"ExplicitObjectStruct",
+"ExplicitObjectStruct?",
+"ByteAndTAndByte<ExplicitObjectStruct>",
+"ByteAndTAndBytePack1<ExplicitObjectStruct>"
 ];
 
 static string SelectGenerateGenericTestAttribute(string typeArg)
